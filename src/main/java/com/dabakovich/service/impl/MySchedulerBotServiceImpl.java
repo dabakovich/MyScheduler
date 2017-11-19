@@ -280,8 +280,7 @@ public class MySchedulerBotServiceImpl implements MySchedulerBotService {
     private BotApiMethod getCreateWhenEditMessage(CallbackQuery callbackQuery) {
         Locale locale = state.getLocale(callbackQuery.getFrom().getId());
         InlineKeyboardMarkup keyboardMarkup = KeyboardBuilder.createInlineKeyboard()
-                .addCallbackButton(MS.getMessage("telegram.ui.button.today", null, locale), "/create?when=today")
-                .addCallbackButton(MS.getMessage("telegram.ui.button.tomorrow", null, locale), "/create?when=tomorrow")
+                .addCallbackButton(MS.getMessage("telegram.ui.button.from_beginning", null, locale), "/create?when=from-beginning")
                 .addRow()
                 .addCallbackButton(MS.getMessage("telegram.ui.button.choose_start_passages", null, locale), "/create?page=0")
                 .addRow()
@@ -291,7 +290,7 @@ public class MySchedulerBotServiceImpl implements MySchedulerBotService {
         return new EditMessageText()
                 .setMessageId(callbackQuery.getMessage().getMessageId())
                 .setChatId(callbackQuery.getMessage().getChatId())
-                .setText(MS.getMessage("telegram.ui.message.when_start_schedule", null, locale))
+                .setText(MS.getMessage("telegram.ui.message.where_start_schedule", null, locale))
                 .setReplyMarkup(keyboardMarkup);
     }
 
@@ -300,11 +299,8 @@ public class MySchedulerBotServiceImpl implements MySchedulerBotService {
         Schedule schedule = readerService.getScheduleByTelegramId(callbackQuery.getFrom().getId());
 
         switch (argument) {
-            case "today":
+            case "from-beginning":
                 schedule.setDayNumber(0);
-                break;
-            case "tomorrow":
-                schedule.setDayNumber(-1);
                 break;
             case "manual":
                 return getCreateWhenManualEditMessage(callbackQuery);
