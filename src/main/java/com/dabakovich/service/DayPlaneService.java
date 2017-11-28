@@ -1,7 +1,6 @@
 package com.dabakovich.service;
 
 import com.dabakovich.entity.DayPlane;
-import com.dabakovich.entity.Reader;
 import com.dabakovich.entity.ScheduleType;
 import org.springframework.data.domain.Page;
 

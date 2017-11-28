@@ -36,7 +36,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by dabak on 14.09.2017, 22:37.
@@ -133,6 +136,7 @@ public class MySchedulerBotServiceImpl implements MySchedulerBotService {
         String path = URI.getPath();
 //        String[] path = data.split(":");
 
+        assert path != null;
         switch (path) {
             case "/":
                 return getMainMenuMessage(callbackQuery);
@@ -304,8 +308,10 @@ public class MySchedulerBotServiceImpl implements MySchedulerBotService {
                 break;
             case "manual":
                 return getCreateWhenManualEditMessage(callbackQuery);
-            case "return":
+            case "return": {
+                state.putMessageState(callbackQuery.getFrom().getId(), MessageState.DEFAULT);
                 return getCreateTypeEditMessage(callbackQuery);
+            }
         }
         readerService.saveScheduleForTelegramId(schedule, callbackQuery.getFrom().getId());
         try {

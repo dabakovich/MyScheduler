@@ -42,6 +42,7 @@ public class ReaderServiceImpl implements ReaderService {
     public Reader saveTelegramUser(User telegramUser) {
         Reader reader = repository.findByTelegramId(telegramUser.getId());
         if (reader == null) {
+            logger.info("Started creating of new Telegram user {}", telegramUser.getId());
             reader = new Reader();
             reader.setRegisteredTime(LocalDateTime.now());
             reader.setReadWelcomeMessage(false);
@@ -52,12 +53,13 @@ public class ReaderServiceImpl implements ReaderService {
         reader.setLastName(telegramUser.getLastName());
         reader.setLanguageTag(telegramUser.getLanguageCode());
         reader = repository.save(reader);
+        logger.info("Saved Telegram user {}", telegramUser.getId());
         return reader;
     }
 
     @Override
-    public Reader save(Reader reader) {
-        return repository.save(reader);
+    public void save(Reader reader) {
+        repository.save(reader);
     }
 
     @Override

@@ -22,11 +22,11 @@
         </encoder>
     </appender>
 
-    <logger name="com.dabakovich" level="info">
-        <appender-ref ref="FILE"/>
-    </logger>
+    <!--<logger name="com.dabakovich" level="info">-->
+    <!--<appender-ref ref="FILE"/>-->
+    <!--</logger>-->
 
     <root level="info">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>

@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by dabak on 14.08.2017, 0:13.
  */
+@SuppressWarnings("unused")
 @Document(collection = "day-plane")
 public class DayPlane {
 
@@ -62,9 +63,9 @@ public class DayPlane {
 
         DayPlane dayPlane = (DayPlane) o;
 
-        if (sequenceNumber != dayPlane.sequenceNumber) return false;
-        if (scheduleType != dayPlane.scheduleType) return false;
-        return passages.equals(dayPlane.passages);
+        return sequenceNumber == dayPlane.sequenceNumber
+                && scheduleType == dayPlane.scheduleType
+                && passages.equals(dayPlane.passages);
     }
 
     @Override

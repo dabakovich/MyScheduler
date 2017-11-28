@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 /**
  * Created by dabak on 10.09.2017, 17:25.
  */
+@SuppressWarnings("unused")
 @Document(collection = "reader")
 public class Reader {
 

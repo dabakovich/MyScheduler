@@ -3,6 +3,7 @@ package com.dabakovich.entity;
 /**
  * Created by dabak on 14.08.2017, 0:15.
  */
+@SuppressWarnings("unused")
 public class Passage {
 
     private String book;
@@ -32,8 +33,8 @@ public class Passage {
 
         Passage passage = (Passage) o;
 
-        if (!book.equals(passage.book)) return false;
-        return verses != null ? verses.equals(passage.verses) : passage.verses == null;
+        return book.equals(passage.book)
+                && (verses != null ? verses.equals(passage.verses) : passage.verses == null);
     }
 
     @Override

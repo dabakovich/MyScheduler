@@ -17,7 +17,7 @@ public interface ReaderService {
 
     Reader saveTelegramUser(User telegramUser);
 
-    Reader save(Reader reader);
+    void save(Reader reader);
 
     Schedule getScheduleByTelegramId(Integer telegramId);
 

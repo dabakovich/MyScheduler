@@ -9,6 +9,7 @@ import java.util.Map;
 /**
  * Created by dabak on 14.09.2017, 22:25.
  */
+@SuppressWarnings("unused")
 public interface BotState {
 
     void putLocale(Integer telegramId, Locale locale);

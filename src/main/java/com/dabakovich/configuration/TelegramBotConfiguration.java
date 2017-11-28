@@ -48,7 +48,7 @@ public class TelegramBotConfiguration {
             try {
                 botSession = telegramBotsApi.registerBot(bot);
             } catch (TelegramApiRequestException e) {
-                Integer errorCode = e.getErrorCode();
+//                Integer errorCode = e.getErrorCode();
 
                 e.printStackTrace();
             }

@@ -22,6 +22,7 @@ public class KeyboardBuilder {
         return new ReplyKeyboardBuilder();
     }
 
+    @SuppressWarnings("unused")
     public static class InlineKeyboardBuilder {
 
         private List<List<InlineKeyboardButton>> buttonsGrid;
@@ -65,6 +66,7 @@ public class KeyboardBuilder {
         }
     }
 
+    @SuppressWarnings("unused")
     public static class ReplyKeyboardBuilder {
 
         private List<KeyboardRow> buttonsGrid;
