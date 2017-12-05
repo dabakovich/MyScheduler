@@ -7,6 +7,9 @@
     <groupId>com.dabakovich</groupId>
     <artifactId>my-scheduler</artifactId>
     <version>1.0.3.BETA</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <!--<packaging>jar</packaging>-->
 
     <dependencies>
@@ -40,6 +43,13 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>ssh-repository</id>
+            <url>scpexe://192.168.0.95/home/dabakovich/my-scheduler</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -49,6 +59,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -67,6 +78,49 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>upload-jar-to-server</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>upload-single</goal>
+                        </goals>
+                        <configuration>
+                            <serverId>ssh-repository</serverId>
+                            <fromFile>${project.build.directory}/${project.build.finalName}.jar</fromFile>
+                            <url>scp://192.168.0.95/home/dabakovich/my-scheduler</url>
+                            <toFile>my-scheduler-test.jar</toFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>update-service</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>sshexec</goal>
+                        </goals>
+                        <configuration>
+                            <serverId>ssh-repository</serverId>
+                            <url>scp://192.168.0.95/</url>
+                            <commands>
+                                <command>systemctl daemon-reload</command>
+                                <command>service my-scheduler restart</command>
+                            </commands>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <extensions>
+            <!-- Enabling the use of SSH -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>3.0.0</version>
+            </extension>
+        </extensions>
     </build>
 </project>
