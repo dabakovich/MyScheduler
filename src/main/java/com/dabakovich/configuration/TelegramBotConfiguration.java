@@ -32,7 +32,7 @@ public class TelegramBotConfiguration {
         ApiContextInitializer.init();
     }
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @SuppressWarnings({"SpringJavaAutowiringInspection", "SpringJavaInjectionPointsAutowiringInspection"})
     public TelegramBotConfiguration(@Autowired(required = false) List<TelegramLongPollingBot> pollingBots,
                                     @Autowired(required = false) List<TelegramWebhookBot> webhookBots) {
         this.pollingBots = pollingBots;
