@@ -1,13 +1,12 @@
 package com.dabakovich.configuration;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.mongodb.core.MongoTemplate;
-
-import java.net.UnknownHostException;
 
 /**
  * Created by dabak on 10.09.2017, 16:23.
@@ -16,9 +15,9 @@ import java.net.UnknownHostException;
 public class ApplicationConfiguration {
 
     @Bean
-    public MongoTemplate mongoTemplate(@Value("${mongodb.host}") String host,
-                                       @Value("${mongodb.db}") String db) throws UnknownHostException {
-        return new MongoTemplate(new MongoClient(host), db);
+    public MongoTemplate mongoTemplate(@Value("${mongodb.host}") String uri,
+                                       @Value("${mongodb.db}") String db) {
+        return new MongoTemplate(new MongoClient(new MongoClientURI(uri)), db);
     }
 
     @Bean

@@ -15,12 +15,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
-			<version>1.5.3.RELEASE</version>
+			<version>RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.10.6.RELEASE</version>
+			<version>RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -57,7 +57,7 @@
 	<distributionManagement>
 		<repository>
 			<id>ssh-repository</id>
-			<url>scpexe://192.168.0.95/home/dabakovich/my-scheduler</url>
+			<url>scpexe://192.168.1.20/home/dabakovich/my-scheduler</url>
 		</repository>
 	</distributionManagement>
 
@@ -89,41 +89,41 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>wagon-maven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<id>upload-jar-to-server</id>
-						<phase>package</phase>
-						<goals>
-							<goal>upload-single</goal>
-						</goals>
-						<configuration>
-							<serverId>ssh-repository</serverId>
-							<fromFile>${project.build.directory}/${project.build.finalName}.jar</fromFile>
-							<url>scp://192.168.1.20/home/dabakovich/my-scheduler</url>
-							<toFile>my-scheduler-test.jar</toFile>
-						</configuration>
-					</execution>
-					<execution>
-						<id>update-service</id>
-						<phase>package</phase>
-						<goals>
-							<goal>sshexec</goal>
-						</goals>
-						<configuration>
-							<serverId>ssh-repository</serverId>
-							<url>scp://192.168.1.20/</url>
-							<commands>
-								<command>systemctl daemon-reload</command>
-								<command>service my-scheduler restart</command>
-							</commands>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!--<plugin>-->
+			<!--<groupId>org.codehaus.mojo</groupId>-->
+			<!--<artifactId>wagon-maven-plugin</artifactId>-->
+			<!--<version>1.0</version>-->
+			<!--<executions>-->
+			<!--<execution>-->
+			<!--<id>upload-jar-to-server</id>-->
+			<!--<phase>package</phase>-->
+			<!--<goals>-->
+			<!--<goal>upload-single</goal>-->
+			<!--</goals>-->
+			<!--<configuration>-->
+			<!--<serverId>ssh-repository</serverId>-->
+			<!--<fromFile>${project.build.directory}/${project.build.finalName}.jar</fromFile>-->
+			<!--<url>scp://192.168.1.20/home/dabakovich/my-scheduler</url>-->
+			<!--<toFile>my-scheduler.jar</toFile>-->
+			<!--</configuration>-->
+			<!--</execution>-->
+			<!--<execution>-->
+			<!--<id>update-service</id>-->
+			<!--<phase>package</phase>-->
+			<!--<goals>-->
+			<!--<goal>sshexec</goal>-->
+			<!--</goals>-->
+			<!--<configuration>-->
+			<!--<serverId>ssh-repository</serverId>-->
+			<!--<url>scp://192.168.1.20/</url>-->
+			<!--<commands>-->
+			<!--<command>systemctl daemon-reload</command>-->
+			<!--<command>service my-scheduler restart</command>-->
+			<!--</commands>-->
+			<!--</configuration>-->
+			<!--</execution>-->
+			<!--</executions>-->
+			<!--</plugin>-->
 		</plugins>
 		<extensions>
 			<!-- Enabling the use of SSH -->
