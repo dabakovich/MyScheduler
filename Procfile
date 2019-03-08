@@ -1,0 +1,1 @@
+worker: java -jar target/my-scheduler-1.0.3.BETA.jar
