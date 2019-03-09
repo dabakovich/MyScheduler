@@ -68,7 +68,7 @@ public class MySchedulerBotServiceImpl implements MySchedulerBotService {
         this.MS = MS;
     }
 
-    @Scheduled(cron = "0 0 6 * * ?")
+    @Scheduled(cron = "0 0 6 * * ?", zone = "GMT+2")
     private void scheduledSendingOfDayPlanes() {
         logger.info("Started daily scheduling...");
         List<Reader> readers = readerService.getReadersByScheduleIsNotNull();
